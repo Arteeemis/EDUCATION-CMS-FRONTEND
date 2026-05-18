@@ -1,0 +1,25 @@
+@import (reference) '../../../styles/tokens.less';
+@import (reference) '../../../styles/mixins.less';
+
+.page {
+  display: flex;
+  flex-direction: column;
+
+  &__block {
+    .container();
+    padding-top: @gap-lg;
+    padding-bottom: @gap-lg;
+  }
+}
+
+.page-state {
+  .container();
+  padding-top: @gap-2xl;
+  padding-bottom: @gap-2xl;
+  text-align: center;
+  color: @text-secondary;
+
+  &--error {
+    color: @text-primary;
+  }
+}

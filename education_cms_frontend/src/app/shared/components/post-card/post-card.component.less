@@ -1,0 +1,68 @@
+@import (reference) '../../../../styles/tokens.less';
+@import (reference) '../../../../styles/mixins.less';
+
+.post-card {
+  .link-reset();
+  display: flex;
+  flex-direction: column;
+  background: @white;
+  border: 1px solid @border;
+  border-radius: @radius;
+  overflow: hidden;
+  transition:
+    box-shadow @transition,
+    transform @transition,
+    border-color @transition;
+  height: 100%;
+
+  &:hover {
+    box-shadow: @shadow-hover;
+    border-color: @border-strong;
+    transform: translateY(-2px);
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: @gray1;
+
+    &--placeholder {
+      background: repeating-linear-gradient(45deg, @gray1, @gray1 8px, @gray2 8px, @gray2 9px);
+    }
+  }
+
+  &__body {
+    padding: @gap-md;
+    display: flex;
+    flex-direction: column;
+    gap: @gap-sm;
+    flex: 1;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: @gap-sm;
+    flex-wrap: wrap;
+  }
+
+  &__date {
+    font-size: @fs-small;
+    color: @text-secondary;
+  }
+
+  &__title {
+    font-size: @fs-h5;
+    font-weight: 500;
+    line-height: 1.4;
+    color: @text-primary;
+  }
+
+  &__tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+}

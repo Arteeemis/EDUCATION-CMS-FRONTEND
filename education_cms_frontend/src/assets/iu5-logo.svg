@@ -1,0 +1,52 @@
+<svg
+              class="hv-svg"
+              viewBox="0 0 600 600"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <linearGradient id="gTeal" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#4DBDC2" />
+                  <stop offset="1" stop-color="#2A8B90" />
+                </linearGradient>
+                <linearGradient id="gOrange" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#FF8A35" />
+                  <stop offset="1" stop-color="#EC6442" />
+                </linearGradient>
+              </defs>
+              <circle
+                cx="330"
+                cy="320"
+                r="260"
+                fill="none"
+                stroke="#383941"
+                stroke-width="1"
+                stroke-dasharray="2 6"
+                opacity="0.35"
+              />
+              <circle cx="330" cy="320" r="210" fill="url(#gTeal)" />
+              <circle cx="170" cy="230" r="110" fill="url(#gOrange)" />
+              <circle cx="460" cy="140" r="14" fill="#383941" />
+              <circle
+                cx="330"
+                cy="320"
+                r="140"
+                fill="none"
+                stroke="#FFFFFF"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <circle cx="200" cy="205" r="8" fill="#FFFFFF" />
+              <text
+                x="330"
+                y="320"
+                text-anchor="middle"
+                dominant-baseline="central"
+                fill="#FFFFFF"
+                font-family="Roboto, sans-serif"
+                font-weight="700"
+                font-size="96"
+                letter-spacing="-2"
+              >
+                ИУ5
+              </text>
+            </svg>

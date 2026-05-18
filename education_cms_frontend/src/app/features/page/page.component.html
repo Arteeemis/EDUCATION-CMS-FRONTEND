@@ -1,0 +1,35 @@
+@if (loading()) {
+  <div class="page-state">
+    <p>Загрузка…</p>
+  </div>
+} @else if (error()) {
+  <div class="page-state page-state--error">
+    <h1>{{ error() }}</h1>
+  </div>
+} @else if (page(); as p) {
+  <article class="page" [attr.data-slug]="p.slug">
+    @for (placement of sortedBlocks(); track placement.block.id) {
+      @if (shouldRender(placement)) {
+        <div class="page__block" [attr.data-block-type]="placement.block.type">
+          @switch (placement.block.type) {
+            @case ('html') {
+              <app-html-block [block]="$any(placement.block)" />
+            }
+            @case ('faq') {
+              <app-faq-block [block]="$any(placement.block)" />
+            }
+            @case ('news_feed') {
+              <app-news-feed-block [block]="$any(placement.block)" />
+            }
+            @case ('header_links') {
+              <app-header-links-block [block]="$any(placement.block)" />
+            }
+            @case ('footer_contacts') {
+              <app-footer-contacts-block [block]="$any(placement.block)" />
+            }
+          }
+        </div>
+      }
+    }
+  </article>
+}

@@ -1,0 +1,57 @@
+@import (reference) '../../../../../styles/tokens.less';
+@import (reference) '../../../../../styles/mixins.less';
+
+.faq-block {
+  &__title {
+    .heading-3();
+    margin-bottom: @gap-md;
+  }
+
+  &__empty {
+    color: @text-muted;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    border-top: 1px solid @border;
+    &:last-child {
+      border-bottom: 1px solid @border;
+    }
+  }
+
+  &__question {
+    .btn-reset();
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: @gap-sm;
+    padding: @gap-md 0;
+    text-align: left;
+    font-size: @fs-h5;
+    font-weight: 500;
+    transition: color @transition;
+
+    &:hover {
+      color: @accent;
+    }
+  }
+
+  &__icon {
+    font-family: @font-mono;
+    font-size: 24px;
+    color: @accent;
+    flex-shrink: 0;
+  }
+
+  &__answer {
+    padding-bottom: @gap-md;
+    color: @text-primary;
+    line-height: @lh-body;
+    white-space: pre-wrap;
+  }
+}

@@ -1,0 +1,27 @@
+@import (reference) '../../../../../styles/tokens.less';
+@import (reference) '../../../../../styles/mixins.less';
+
+.header-links {
+  &__list {
+    display: flex;
+    gap: @gap-md;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    .link-reset();
+    font-size: @fs-body;
+    color: @text-primary;
+    transition: color @transition;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      color: @accent;
+    }
+    &.is-active {
+      color: @accent;
+      border-bottom-color: @accent;
+    }
+  }
+}

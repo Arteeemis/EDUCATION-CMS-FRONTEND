@@ -1,0 +1,30 @@
+<section class="faq-block">
+  @if (block().title) {
+    <h2 class="faq-block__title">{{ block().title }}</h2>
+  }
+
+  @if (sortedQuestions().length === 0) {
+    <p class="faq-block__empty">Пока нет вопросов.</p>
+  } @else {
+    <ul class="faq-block__list">
+      @for (q of sortedQuestions(); track q.id) {
+        <li class="faq-block__item" [class.is-open]="isOpen(q.id)">
+          <button
+            type="button"
+            class="faq-block__question"
+            [attr.aria-expanded]="isOpen(q.id)"
+            (click)="toggle(q.id)"
+          >
+            <span>{{ q.question }}</span>
+            <span class="faq-block__icon" aria-hidden="true">
+              {{ isOpen(q.id) ? '−' : '+' }}
+            </span>
+          </button>
+          @if (isOpen(q.id)) {
+            <div class="faq-block__answer">{{ q.answer }}</div>
+          }
+        </li>
+      }
+    </ul>
+  }
+</section>

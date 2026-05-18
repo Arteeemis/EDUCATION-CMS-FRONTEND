@@ -1,0 +1,44 @@
+@import (reference) '../../../../../styles/tokens.less';
+@import (reference) '../../../../../styles/mixins.less';
+
+.news-feed {
+  &__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: @gap-md;
+    margin-bottom: @gap-md;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    .heading-3();
+  }
+
+  &__more {
+    font-size: @fs-small;
+    color: @accent;
+    white-space: nowrap;
+  }
+
+  &__empty {
+    color: @text-muted;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: @gap-md;
+
+    @media (min-width: @bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: @bp-lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__item {
+    display: flex; /* чтобы карточка растягивалась по grid-ячейке */
+  }
+}

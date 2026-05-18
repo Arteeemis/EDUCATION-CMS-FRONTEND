@@ -1,0 +1,62 @@
+<div class="contacts">
+  <h2 class="contacts__title">Контакты</h2>
+
+  <div class="contacts__grid">
+    <div class="contacts__cell">
+      <p class="contacts__label">Главный адрес</p>
+      <p class="contacts__value">{{ block().address }}</p>
+    </div>
+
+    <div class="contacts__cell">
+      <p class="contacts__label">Контакты (по общим вопросам)</p>
+      @if (block().phone) {
+        <p class="contacts__value">
+          <a [href]="'tel:' + block().phone">{{ block().phone }}</a>
+        </p>
+      }
+      @if (block().email) {
+        <p class="contacts__value">
+          <a [href]="'mailto:' + block().email">{{ block().email }}</a>
+        </p>
+      }
+    </div>
+
+    @if (workingHours()) {
+      <div class="contacts__cell">
+        <p class="contacts__label">Время работы</p>
+        <p class="contacts__value">Пн–{{ block().weekends ? 'Пт' : 'Вс' }}: {{ workingHours() }}</p>
+        @if (block().weekends) {
+          <p class="contacts__value contacts__value--muted">{{ block().weekends }} — выходной</p>
+        }
+      </div>
+    }
+
+    @if (block().vk_url || block().tg_url || block().max_url) {
+      <div class="contacts__cell">
+        <p class="contacts__label">Социальные сети</p>
+        <div class="contacts__socials">
+          @if (block().vk_url) {
+            <a [href]="block().vk_url" target="_blank" rel="noopener" class="contacts__social"
+              >VK</a
+            >
+          }
+          @if (block().tg_url) {
+            <a [href]="block().tg_url" target="_blank" rel="noopener" class="contacts__social"
+              >TG</a
+            >
+          }
+          @if (block().max_url) {
+            <a [href]="block().max_url" target="_blank" rel="noopener" class="contacts__social"
+              >MAX</a
+            >
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Заглушка под карту. iframe вставишь позже. -->
+  <div class="contacts__map" aria-label="Интерактивная карта">
+    <span>Интерактивная карта</span>
+  </div>
+</div>

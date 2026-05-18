@@ -1,0 +1,19 @@
+@import (reference) '../../../styles/tokens.less';
+@import (reference) '../../../styles/mixins.less';
+
+.footer {
+  border-top: 1px solid @border;
+  background: @bg-page;
+  margin-top: auto;
+
+  &__inner {
+    .container();
+    padding-top: @gap-lg;
+    padding-bottom: @gap-lg;
+  }
+
+  &__fallback {
+    color: @text-muted;
+    font-size: @fs-small;
+  }
+}

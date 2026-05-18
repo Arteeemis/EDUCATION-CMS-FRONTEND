@@ -1,0 +1,22 @@
+<nav class="header-links" aria-label="Главное меню">
+  @if (sortedLinks().length > 0) {
+    <ul class="header-links__list">
+      @for (link of sortedLinks(); track link.id) {
+        <li class="header-links__item">
+          @if (isExternal(link.url)) {
+            <a
+              [href]="link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="header-links__link"
+              >{{ link.title }}</a>
+          } @else {
+            <a [routerLink]="link.url" routerLinkActive="is-active" class="header-links__link">
+              {{ link.title }}
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  }
+</nav>

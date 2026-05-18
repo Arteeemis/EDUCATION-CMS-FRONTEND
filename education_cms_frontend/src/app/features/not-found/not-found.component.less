@@ -1,0 +1,31 @@
+@import (reference) '../../../styles/tokens.less';
+@import (reference) '../../../styles/mixins.less';
+
+.not-found {
+  .container();
+  padding-top: @gap-2xl;
+  padding-bottom: @gap-2xl;
+  text-align: center;
+
+  &__code {
+    font-family: @font-mono;
+    font-size: 72px;
+    color: @text-muted;
+    margin-bottom: @gap-sm;
+  }
+
+  &__title {
+    .heading-2();
+    margin-bottom: @gap-sm;
+  }
+
+  &__text {
+    color: @text-secondary;
+    margin-bottom: @gap-lg;
+  }
+
+  &__link {
+    color: @accent;
+    font-weight: 500;
+  }
+}

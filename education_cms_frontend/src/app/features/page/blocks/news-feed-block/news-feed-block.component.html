@@ -1,0 +1,22 @@
+<section class="news-feed">
+  <div class="news-feed__head">
+    @if (block().title) {
+      <h2 class="news-feed__title">{{ block().title }}</h2>
+    }
+    @if (block().posts_total > block().posts.length) {
+      <a routerLink="/news" class="news-feed__more"> Все новости ({{ block().posts_total }}) </a>
+    }
+  </div>
+
+  @if (block().posts.length === 0) {
+    <p class="news-feed__empty">Публикаций пока нет.</p>
+  } @else {
+    <ul class="news-feed__list">
+      @for (post of block().posts; track post.id) {
+        <li class="news-feed__item">
+          <app-post-card [post]="post" />
+        </li>
+      }
+    </ul>
+  }
+</section>

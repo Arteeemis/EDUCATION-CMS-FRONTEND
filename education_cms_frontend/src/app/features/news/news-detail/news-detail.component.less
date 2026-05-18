@@ -1,0 +1,129 @@
+@import (reference) '../../../../styles/tokens.less';
+@import (reference) '../../../../styles/mixins.less';
+
+.news-detail {
+  .container();
+  padding-top: @gap-lg;
+  padding-bottom: @gap-2xl;
+  max-width: 800px;
+
+  &__state {
+    text-align: center;
+    padding: @gap-2xl 0;
+    color: @text-secondary;
+
+    &--error h1 {
+      .heading-2();
+      color: @text-primary;
+      margin-bottom: @gap-md;
+    }
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: @gap-sm;
+    margin-bottom: @gap-lg;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: @gap-sm;
+    flex-wrap: wrap;
+    color: @text-secondary;
+    font-size: @fs-small;
+  }
+
+  &__author {
+    color: @text-secondary;
+  }
+
+  &__title {
+    .heading-2();
+    color: @text-primary;
+  }
+
+  &__tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  &__figure {
+    margin-bottom: @gap-lg;
+    border-radius: @radius;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &__content {
+    font-size: @fs-body;
+    line-height: 1.7;
+    color: @text-primary;
+
+    // Минимальные дефолты для тегов в content,
+    // т.к. это сырой HTML из админки
+    p {
+      margin-bottom: @gap-sm;
+    }
+    h2 {
+      .heading-3();
+      margin: @gap-lg 0 @gap-sm;
+    }
+    h3 {
+      .heading-4();
+      margin: @gap-md 0 @gap-sm;
+    }
+    ul,
+    ol {
+      margin: @gap-sm 0;
+      padding-left: @gap-md;
+      list-style: revert;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    a {
+      color: @accent;
+      text-decoration: underline;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: @radius-sm;
+      margin: @gap-sm 0;
+    }
+    blockquote {
+      margin: @gap-md 0;
+      padding-left: @gap-md;
+      border-left: 3px solid @accent;
+      color: @text-secondary;
+      font-style: italic;
+    }
+    code {
+      font-family: @font-mono;
+      font-size: 0.9em;
+      background: @gray1;
+      padding: 2px 6px;
+      border-radius: @radius-sm;
+    }
+  }
+
+  &__footer {
+    margin-top: @gap-xl;
+    padding-top: @gap-md;
+    border-top: 1px solid @border;
+  }
+
+  &__back-link {
+    color: @accent;
+    font-size: @fs-small;
+    font-weight: 500;
+  }
+}

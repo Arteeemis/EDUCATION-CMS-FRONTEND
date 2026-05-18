@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build: .
+    container_name: frontend_cms
+    ports:
+      - '4200:4200'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm start -- --host 0.0.0.0 --poll 2000

@@ -1,0 +1,15 @@
+<header class="header">
+  <div class="header__inner">
+    <a routerLink="/home" class="header__brand" aria-label="На главную">
+      <img src="assets/mgtu-logo.png" alt="МГТУ им. Н.Э. Баумана" class="header__brand-logo" />
+      <span class="header__brand-text">
+        <span class="header__brand-line1">Кафедра ИУ-5</span>
+        <span class="header__brand-line2">Системы обработки информации и управления</span>
+      </span>
+    </a>
+
+    @if (menu(); as m) {
+      <app-header-links-block [block]="m" class="header__nav" />
+    }
+  </div>
+</header>

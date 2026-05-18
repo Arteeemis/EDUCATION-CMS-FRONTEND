@@ -1,0 +1,30 @@
+<a [routerLink]="['/news', post().id]" class="post-card">
+  @if (post().image) {
+    <img [src]="post().image" [alt]="post().title" class="post-card__image" />
+  } @else {
+    <div class="post-card__image post-card__image--placeholder" aria-hidden="true"></div>
+  }
+
+  <div class="post-card__body">
+    <div class="post-card__meta">
+      @if (post().is_urgent) {
+        <app-badge variant="urgent">Важно</app-badge>
+      }
+      <time class="post-card__date">
+        {{ post().published_at | date: 'd MMMM y' : '' : 'ru' }}
+      </time>
+    </div>
+
+    <h3 class="post-card__title">{{ post().title }}</h3>
+
+    @if (tags().length > 0) {
+      <ul class="post-card__tags">
+        @for (tag of tags(); track tag) {
+          <li>
+            <app-badge variant="tag">{{ tag }}</app-badge>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</a>

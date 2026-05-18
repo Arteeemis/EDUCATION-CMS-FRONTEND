@@ -1,0 +1,9 @@
+<footer class="footer">
+  <div class="footer__inner">
+    @if (contacts(); as c) {
+      <app-footer-contacts-block [block]="c" />
+    } @else {
+      <p class="footer__fallback">Контакты появятся после настройки в админке.</p>
+    }
+  </div>
+</footer>

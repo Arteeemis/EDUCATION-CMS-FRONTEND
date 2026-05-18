@@ -1,0 +1,30 @@
+@import (reference) '../../../../styles/tokens.less';
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: @fs-micro;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: @radius-sm;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+
+  &[data-variant='urgent'] {
+    background: @accent-warm-2;
+    color: @white;
+    text-transform: uppercase;
+  }
+  &[data-variant='tag'] {
+    background: @primary4;
+    color: @text-accent;
+  }
+  &[data-variant='accent'] {
+    background: @accent;
+    color: @white;
+  }
+  &[data-variant='neutral'] {
+    background: @gray1;
+    color: @text-secondary;
+  }
+}
