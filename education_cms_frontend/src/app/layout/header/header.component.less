@@ -2,27 +2,26 @@
 @import (reference) '../../../styles/mixins.less';
 
 .header {
-  border-bottom: 1px solid @border;
-  background: @bg-page;
   position: sticky;
   top: 0;
   z-index: 100;
+  background: @white;
+  border-bottom: 1px solid @border;
 
   &__inner {
     .container();
     min-height: @header-height-mobile;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: @gap-md;
-    flex-wrap: wrap;
 
     @media (min-width: @bp-lg) {
       min-height: @header-height;
-      flex-wrap: nowrap;
+      gap: @gap-lg;
     }
   }
 
+  // === БРЕНД (лого + текст) ===
   &__brand {
     .link-reset();
     display: flex;
@@ -30,40 +29,131 @@
     gap: @gap-sm;
     color: @text-primary;
     flex-shrink: 0;
+    margin-right: auto;
+
+    @media (min-width: @bp-lg) {
+      margin-right: 0;
+    }
   }
 
   &__brand-logo {
-    height: 40px;
-    width: auto;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+
+    @media (min-width: @bp-md) {
+      width: 44px;
+      height: 44px;
+    }
   }
 
   &__brand-text {
     display: flex;
     flex-direction: column;
-    line-height: 1.1;
+    line-height: 1.15;
   }
 
   &__brand-line1 {
     font-size: @fs-small;
     font-weight: 700;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    color: @text-primary;
   }
 
   &__brand-line2 {
-    font-size: @fs-micro;
+    font-size: 10px;
     color: @text-secondary;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-top: 5px;
+    margin-top: 2px;
+    max-width: 240px;
+
+    @media (min-width: @bp-md) {
+      font-size: @fs-micro;
+      max-width: none;
+    }
   }
 
+  // === НАВИГАЦИЯ ===
   &__nav {
+    // Десктоп: справа в строке
+    @media (min-width: @bp-lg) {
+      margin-left: auto;
+    }
+
+    // Мобайл: выезжающая панель справа
     @media (max-width: (@bp-lg - 1px)) {
-      width: 100%;
-      order: 3;
-      padding-top: @gap-sm;
-      border-top: 1px solid @border;
+      position: fixed;
+      top: @header-height-mobile;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 80vw);
+      background: @white;
+      border-left: 1px solid @border;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.06);
+      padding: @gap-lg @gap-md;
+      transform: translateX(100%);
+      transition: transform @transition;
+      overflow-y: auto;
+    }
+  }
+
+  &--menu-open &__nav {
+    @media (max-width: (@bp-lg - 1px)) {
+      transform: translateX(0);
+    }
+  }
+
+  // === БУРГЕР ===
+  &__burger {
+    .btn-reset();
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-shrink: 0;
+
+    @media (min-width: @bp-lg) {
+      display: none;
+    }
+
+    span {
+      width: 22px;
+      height: 2px;
+      background: @text-primary;
+      border-radius: 2px;
+      transition:
+        transform @transition,
+        opacity @transition;
+    }
+
+    &.is-active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    &.is-active span:nth-child(2) {
+      opacity: 0;
+    }
+    &.is-active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  // === ЗАТЕМНЁННЫЙ ФОН ===
+  &__backdrop {
+    .btn-reset();
+    position: fixed;
+    inset: @header-height-mobile 0 0 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 99;
+    cursor: pointer;
+
+    @media (min-width: @bp-lg) {
+      display: none;
     }
   }
 }

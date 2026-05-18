@@ -1,15 +1,39 @@
-<header class="header">
+<header class="header" [class.header--menu-open]="mobileOpen()">
   <div class="header__inner">
     <a routerLink="/home" class="header__brand" aria-label="На главную">
-      <img src="assets/mgtu-logo.png" alt="МГТУ им. Н.Э. Баумана" class="header__brand-logo" />
+      <img src="assets/mgtu-logo.png" alt="" class="header__brand-logo" aria-hidden="true" />
       <span class="header__brand-text">
         <span class="header__brand-line1">Кафедра ИУ-5</span>
-        <span class="header__brand-line2">Системы обработки информации и управления</span>
+        <span class="header__brand-line2">Системы обработки информации и&nbsp;управления</span>
       </span>
     </a>
 
+    <button
+      type="button"
+      class="header__burger"
+      [class.is-active]="mobileOpen()"
+      [attr.aria-expanded]="mobileOpen()"
+      aria-label="Меню"
+      (click)="toggleMobile()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     @if (menu(); as m) {
-      <app-header-links-block [block]="m" class="header__nav" />
+      <nav class="header__nav" aria-label="Главное меню">
+        <app-header-links-block [block]="m" />
+      </nav>
     }
   </div>
 </header>
+
+@if (mobileOpen()) {
+  <button
+    type="button"
+    class="header__backdrop"
+    aria-label="Закрыть меню"
+    (click)="closeMobile()"
+  ></button>
+}

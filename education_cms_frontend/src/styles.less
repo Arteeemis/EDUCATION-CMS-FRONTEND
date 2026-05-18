@@ -69,3 +69,11 @@ button {
 :focus-visible {
   .focus-ring();
 }
+
+body:has(.header--menu-open) {
+  overflow: hidden;
+
+  @media (min-width: @bp-lg) {
+    overflow: auto;
+  }
+}

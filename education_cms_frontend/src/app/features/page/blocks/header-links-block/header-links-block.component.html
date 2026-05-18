@@ -9,9 +9,15 @@
               target="_blank"
               rel="noopener noreferrer"
               class="header-links__link"
-              >{{ link.title }}</a>
+              >{{ link.title }}</a
+            >
           } @else {
-            <a [routerLink]="link.url" routerLinkActive="is-active" class="header-links__link">
+            <a
+              [routerLink]="link.url"
+              routerLinkActive="is-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="header-links__link"
+            >
               {{ link.title }}
             </a>
           }
