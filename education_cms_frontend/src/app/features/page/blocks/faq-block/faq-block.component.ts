@@ -10,7 +10,6 @@ import { FaqBlock } from '@core/models';
 export class FaqBlockComponent {
   readonly block = input.required<FaqBlock>();
 
-  /** Set с id раскрытых вопросов */
   private readonly openIds = signal<Set<number>>(new Set());
 
   readonly sortedQuestions = computed(() =>

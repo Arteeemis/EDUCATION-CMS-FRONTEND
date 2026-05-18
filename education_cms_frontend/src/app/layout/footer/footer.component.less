@@ -2,18 +2,25 @@
 @import (reference) '../../../styles/mixins.less';
 
 .footer {
-  border-top: 1px solid @border;
-  background: @bg-page;
   margin-top: auto;
+  background: @white;
+  border-top: 1px solid @border;
 
   &__inner {
     .container();
-    padding-top: @gap-lg;
-    padding-bottom: @gap-lg;
+    padding-top: @gap-xl;
+    padding-bottom: @gap-xl;
+
+    @media (min-width: @bp-lg) {
+      padding-top: @gap-2xl;
+      padding-bottom: @gap-xl;
+    }
   }
 
   &__fallback {
     color: @text-muted;
     font-size: @fs-small;
+    text-align: center;
+    padding: @gap-md 0;
   }
 }

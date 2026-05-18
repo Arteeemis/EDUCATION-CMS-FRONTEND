@@ -122,8 +122,37 @@
   }
 
   &__back-link {
-    color: @accent;
+    // Стили работают для <a> и <button> одновременно
+    display: inline-flex;
+    align-items: center;
+    gap: @gap-xs;
+    background: none;
+    border: 1px solid @border;
+    border-radius: @radius-sm;
+    padding: 8px 14px;
+    cursor: pointer;
+    color: @text-primary;
+    font-family: inherit;
     font-size: @fs-small;
     font-weight: 500;
+    text-decoration: none;
+    transition:
+      border-color @transition,
+      color @transition,
+      background @transition;
+
+    svg {
+      transition: transform @transition;
+    }
+
+    &:hover {
+      border-color: @accent;
+      color: @accent;
+      background: fade(@accent, 5%);
+
+      svg {
+        transform: translateX(-3px);
+      }
+    }
   }
 }

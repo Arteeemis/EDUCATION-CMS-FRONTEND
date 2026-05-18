@@ -10,28 +10,63 @@
   border-radius: @radius;
   overflow: hidden;
   transition:
-    box-shadow @transition,
+    border-color @transition,
     transform @transition,
-    border-color @transition;
+    box-shadow @transition;
   height: 100%;
+  position: relative;
 
   &:hover {
-    box-shadow: @shadow-hover;
     border-color: @border-strong;
-    transform: translateY(-2px);
+    box-shadow: @shadow-hover;
+    transform: translateY(-3px);
+
+    .post-card__image:not(.post-card__image--placeholder) {
+      transform: scale(1.04);
+    }
+    .post-card__title {
+      color: @accent;
+    }
+    .post-card__cta {
+      color: @accent;
+      svg {
+        transform: translateX(3px);
+      }
+    }
+  }
+
+  // === MEDIA (картинка с бейджем) ===
+  &__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: @gray1;
   }
 
   &__image {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100%;
     object-fit: cover;
-    background: @gray1;
+    display: block;
+    transition: transform 400ms ease;
 
     &--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: @text-muted;
       background: repeating-linear-gradient(45deg, @gray1, @gray1 8px, @gray2 8px, @gray2 9px);
     }
   }
 
+  &__urgent {
+    position: absolute;
+    top: @gap-sm;
+    left: @gap-sm;
+    z-index: 1;
+  }
+
+  // === BODY ===
   &__body {
     padding: @gap-md;
     display: flex;
@@ -40,29 +75,47 @@
     flex: 1;
   }
 
-  &__meta {
-    display: flex;
-    align-items: center;
-    gap: @gap-sm;
-    flex-wrap: wrap;
-  }
-
   &__date {
-    font-size: @fs-small;
+    font-family: @font-mono;
+    font-size: @fs-micro;
     color: @text-secondary;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   &__title {
     font-size: @fs-h5;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.35;
     color: @text-primary;
+    transition: color @transition;
+
+    // Обрезаем длинные заголовки до 3 строк, чтобы карточки не разъезжались
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__tags {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: @gap-xs;
     margin-top: auto;
+    padding-top: @gap-sm;
+    color: @text-secondary;
+    font-size: @fs-small;
+    font-weight: 500;
+    transition: color @transition;
+
+    svg {
+      transition: transform @transition;
+    }
   }
 }

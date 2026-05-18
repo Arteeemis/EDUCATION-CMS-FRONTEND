@@ -3,78 +3,175 @@
 
 .contacts {
   &__title {
-    .heading-3();
-    margin-bottom: @gap-md;
+    .heading-2();
+    color: @text-primary;
+    margin-bottom: @gap-lg;
   }
 
-  &__grid {
+  // === LAYOUT: инфо слева, карта справа ===
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: @gap-lg;
+
+    @media (min-width: @bp-md) {
+      grid-template-columns: 1fr 1.4fr;
+      gap: @gap-xl;
+    }
+  }
+
+  // === ИНФО (слева) ===
+  &__info {
     display: grid;
     grid-template-columns: 1fr;
     gap: @gap-md;
-    margin-bottom: @gap-lg;
+    align-content: start;
 
-    @media (min-width: @bp-md) {
-      grid-template-columns: repeat(2, 1fr);
+    @media (min-width: @bp-sm) {
+      grid-template-columns: 1fr 1fr;
     }
+  }
+
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   &__label {
     font-size: @fs-small;
     color: @text-secondary;
-    margin-bottom: @gap-xs;
+    margin-bottom: 2px;
   }
 
   &__value {
     font-size: @fs-body;
     color: @text-primary;
-    margin-bottom: 2px;
+    line-height: 1.4;
 
+    &--strong {
+      font-weight: 500;
+    }
     &--muted {
       color: @text-secondary;
       font-size: @fs-small;
     }
+  }
 
-    a {
-      color: inherit;
-      &:hover {
-        color: @accent;
-      }
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    transition: color @transition;
+    &:hover {
+      color: @accent;
     }
   }
 
+  // === СОЦИАЛКИ ===
   &__socials {
     display: flex;
-    gap: @gap-sm;
+    gap: @gap-xs;
+    margin-top: 4px;
   }
 
   &__social {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: @radius;
-    background: @accent;
-    color: @white;
-    font-size: @fs-small;
-    font-weight: 500;
-    transition: background @transition;
+    transition: transform @transition;
     &:hover {
-      background: darken(@accent, 8%);
-      color: @white;
+      transform: translateY(-2px);
     }
   }
 
-  &__map {
-    background: repeating-linear-gradient(45deg, @gray1, @gray1 10px, @gray2 10px, @gray2 11px);
-    border-radius: @radius;
-    min-height: 320px;
-    display: flex;
+  &__social-icon {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: @radius-sm;
+    color: @white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+
+    &--vk {
+      background: #0077ff;
+    }
+    &--tg {
+      background: #229ed9;
+    }
+    &--max {
+      background: @primary1;
+    }
+  }
+
+  // === КАРТА (справа) ===
+  &__map {
+    border: 1px solid @border;
+    border-radius: @radius;
+    min-height: 260px;
+    overflow: hidden;
+    background: @gray1;
+
+    @media (min-width: @bp-md) {
+      min-height: 100%;
+    }
+
+    // Когда вставишь iframe — он растянется на 100% и заглушка пропадёт
+    :where(iframe) {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      border: 0;
+      display: block;
+    }
+  }
+
+  &__map-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: @gap-sm;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 23px,
+        fade(@gray3, 30%) 23px,
+        fade(@gray3, 30%) 24px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 23px,
+        fade(@gray3, 30%) 23px,
+        fade(@gray3, 30%) 24px
+      ),
+      @gray1;
+  }
+
+  &__map-pin {
+    width: 24px;
+    height: 24px;
+    border-radius: 50% 50% 50% 0;
+    background: @accent-warm;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__map-text {
     color: @text-secondary;
     font-size: @fs-small;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    background: @white;
+    padding: 4px 12px;
+    border-radius: @radius-sm;
   }
 }

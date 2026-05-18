@@ -1,5 +1,6 @@
 import { Component, input, inject, signal, effect, computed } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NewsService } from '@core/services/news.service';
 import { LayoutService } from '@core/services/layout.service';
@@ -10,7 +11,7 @@ import { BadgeComponent } from '@shared/components/badge/badge.component';
 @Component({
   selector: 'app-news-detail',
   standalone: true,
-  imports: [RouterLink, DatePipe, SafeHtmlPipe, BadgeComponent],
+  imports: [DatePipe, SafeHtmlPipe, BadgeComponent],
   templateUrl: './news-detail.component.html',
   styleUrl: './news-detail.component.less',
 })
@@ -19,6 +20,8 @@ export class NewsDetailComponent {
 
   private readonly news = inject(NewsService);
   private readonly layout = inject(LayoutService);
+  private readonly location = inject(Location);
+  private readonly router = inject(Router);
 
   readonly post = signal<Post | null>(null);
   readonly loading = signal(false);
@@ -36,8 +39,6 @@ export class NewsDetailComponent {
   constructor() {
     effect(() => {
       const rawId = this.id();
-
-      // На News-detail header/footer всегда показываются
       this.layout.resetVisibility();
 
       const numericId = Number(rawId);
@@ -63,5 +64,18 @@ export class NewsDetailComponent {
         },
       });
     });
+  }
+
+  /**
+   * Возврат назад: если в истории есть страница, возвращаемся туда,
+   * иначе идём на главную (например, при открытии деталки по прямой ссылке).
+   */
+  goBack(): void {
+    const hasHistory = window.history.length > 1;
+    if (hasHistory) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }

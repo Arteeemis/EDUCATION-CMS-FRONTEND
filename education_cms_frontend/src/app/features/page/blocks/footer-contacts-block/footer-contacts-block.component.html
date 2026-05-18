@@ -1,62 +1,67 @@
 <div class="contacts">
   <h2 class="contacts__title">Контакты</h2>
 
-  <div class="contacts__grid">
-    <div class="contacts__cell">
-      <p class="contacts__label">Главный адрес</p>
-      <p class="contacts__value">{{ block().address }}</p>
-    </div>
-
-    <div class="contacts__cell">
-      <p class="contacts__label">Контакты (по общим вопросам)</p>
-      @if (block().phone) {
-        <p class="contacts__value">
-          <a [href]="'tel:' + block().phone">{{ block().phone }}</a>
-        </p>
-      }
-      @if (block().email) {
-        <p class="contacts__value">
-          <a [href]="'mailto:' + block().email">{{ block().email }}</a>
-        </p>
-      }
-    </div>
-
-    @if (workingHours()) {
+  <div class="contacts__layout">
+    <div class="contacts__info">
       <div class="contacts__cell">
-        <p class="contacts__label">Время работы</p>
-        <p class="contacts__value">Пн–{{ block().weekends ? 'Пт' : 'Вс' }}: {{ workingHours() }}</p>
-        @if (block().weekends) {
-          <p class="contacts__value contacts__value--muted">{{ block().weekends }} — выходной</p>
+        <p class="contacts__label">Главный адрес</p>
+        <p class="contacts__value contacts__value--strong">{{ block().address }}</p>
+      </div>
+
+      <div class="contacts__cell">
+        <p class="contacts__label">Контакты (по общим вопросам)</p>
+        @if (block().phone) {
+          <p class="contacts__value">
+            <a [href]="'tel:' + block().phone" class="contacts__link">{{ block().phone }}</a>
+          </p>
+        }
+        @if (block().email) {
+          <p class="contacts__value">
+            <a [href]="'mailto:' + block().email" class="contacts__link">{{ block().email }}</a>
+          </p>
         }
       </div>
-    }
 
-    @if (block().vk_url || block().tg_url || block().max_url) {
-      <div class="contacts__cell">
-        <p class="contacts__label">Социальные сети</p>
-        <div class="contacts__socials">
-          @if (block().vk_url) {
-            <a [href]="block().vk_url" target="_blank" rel="noopener" class="contacts__social"
-              >VK</a
-            >
-          }
-          @if (block().tg_url) {
-            <a [href]="block().tg_url" target="_blank" rel="noopener" class="contacts__social"
-              >TG</a
-            >
-          }
-          @if (block().max_url) {
-            <a [href]="block().max_url" target="_blank" rel="noopener" class="contacts__social"
-              >MAX</a
-            >
+      @if (workingHours()) {
+        <div class="contacts__cell">
+          <p class="contacts__label">Время работы</p>
+          <p class="contacts__value">Пн–Сб: {{ workingHours() }}</p>
+          @if (block().weekends) {
+            <p class="contacts__value contacts__value--muted">{{ block().weekends }} — выходной</p>
           }
         </div>
-      </div>
-    }
-  </div>
+      }
 
-  <!-- Заглушка под карту. iframe вставишь позже. -->
-  <div class="contacts__map" aria-label="Интерактивная карта">
-    <span>Интерактивная карта</span>
+      @if (socials().length > 0) {
+        <div class="contacts__cell">
+          <p class="contacts__label">Социальные сети</p>
+          <ul class="contacts__socials">
+            @for (s of socials(); track s.icon) {
+              <li>
+                <a
+                  [href]="s.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contacts__social"
+                  [attr.aria-label]="s.label"
+                >
+                  <span [class]="'contacts__social-icon contacts__social-icon--' + s.icon">
+                    {{ s.icon === 'vk' ? 'VK' : s.icon === 'tg' ? 'TG' : 'M' }}
+                  </span>
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <!-- Слот под карту: iframe вставится сюда позже -->
+    <div class="contacts__map" aria-label="Интерактивная карта">
+      <div class="contacts__map-placeholder">
+        <span class="contacts__map-pin" aria-hidden="true"></span>
+        <span class="contacts__map-text">Интерактивная карта</span>
+      </div>
+    </div>
   </div>
 </div>

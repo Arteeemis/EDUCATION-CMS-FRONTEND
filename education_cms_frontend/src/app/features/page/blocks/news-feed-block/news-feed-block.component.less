@@ -2,29 +2,93 @@
 @import (reference) '../../../../../styles/mixins.less';
 
 .news-feed {
+  // === HEAD ===
   &__head {
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
     justify-content: space-between;
     gap: @gap-md;
-    margin-bottom: @gap-md;
+    margin-bottom: @gap-lg;
     flex-wrap: wrap;
+
+    @media (min-width: @bp-md) {
+      margin-bottom: @gap-xl;
+    }
+  }
+
+  &__head-left {
+    display: flex;
+    flex-direction: column;
+    gap: @gap-xs;
+  }
+
+  &__eyebrow {
+    .eyebrow();
   }
 
   &__title {
-    .heading-3();
+    .heading-2();
+    color: @text-primary;
   }
 
+  // === КНОПКА «Все публикации» ===
   &__more {
+    .link-reset();
+    display: inline-flex;
+    align-items: center;
+    gap: @gap-xs;
+    padding: 10px 18px;
+    border: 1px solid @border;
+    border-radius: @radius-sm;
+    background: @white;
+    color: @text-primary;
     font-size: @fs-small;
-    color: @accent;
+    font-weight: 500;
+    transition:
+      border-color @transition,
+      color @transition,
+      background @transition;
     white-space: nowrap;
+
+    &:hover {
+      border-color: @accent;
+      color: @accent;
+      background: fade(@accent, 5%);
+
+      .news-feed__more-arrow {
+        transform: translateX(2px);
+      }
+    }
   }
 
+  &__more-count {
+    font-family: @font-mono;
+    font-size: @fs-micro;
+    padding: 2px 6px;
+    border-radius: @radius-sm;
+    background: @gray1;
+    color: @text-secondary;
+    transition:
+      background @transition,
+      color @transition;
+  }
+
+  &__more:hover &__more-count {
+    background: @accent;
+    color: @white;
+  }
+
+  &__more-arrow {
+    transition: transform @transition;
+  }
+
+  // === EMPTY ===
   &__empty {
     color: @text-muted;
+    padding: @gap-md 0;
   }
 
+  // === LIST ===
   &__list {
     display: grid;
     grid-template-columns: 1fr;
@@ -32,6 +96,7 @@
 
     @media (min-width: @bp-md) {
       grid-template-columns: repeat(2, 1fr);
+      gap: @gap-lg;
     }
     @media (min-width: @bp-lg) {
       grid-template-columns: repeat(3, 1fr);
@@ -39,6 +104,6 @@
   }
 
   &__item {
-    display: flex; /* чтобы карточка растягивалась по grid-ячейке */
+    display: flex;
   }
 }

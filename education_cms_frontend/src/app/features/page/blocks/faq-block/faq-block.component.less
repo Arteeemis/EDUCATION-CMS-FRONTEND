@@ -2,56 +2,177 @@
 @import (reference) '../../../../../styles/mixins.less';
 
 .faq-block {
+  // === HEAD ===
+  &__head {
+    margin-bottom: @gap-lg;
+    display: flex;
+    flex-direction: column;
+    gap: @gap-xs;
+  }
+
+  &__eyebrow {
+    .eyebrow();
+  }
+
   &__title {
-    .heading-3();
-    margin-bottom: @gap-md;
+    .heading-1();
+    color: @text-primary;
+    max-width: 700px;
   }
 
   &__empty {
     color: @text-muted;
+    padding: @gap-md 0;
   }
 
+  // === LIST ===
   &__list {
     display: flex;
     flex-direction: column;
+    border-top: 1px solid @border;
   }
 
   &__item {
-    border-top: 1px solid @border;
-    &:last-child {
-      border-bottom: 1px solid @border;
+    border-bottom: 1px solid @border;
+    transition: background @transition;
+
+    &.is-open {
+      background: fade(@primary4, 30%);
     }
   }
 
+  // === QUESTION (кликабельная строка) ===
   &__question {
     .btn-reset();
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    gap: @gap-sm;
-    padding: @gap-md 0;
+    gap: @gap-md;
+    padding: @gap-md @gap-sm;
     text-align: left;
-    font-size: @fs-h5;
-    font-weight: 500;
     transition: color @transition;
 
+    @media (min-width: @bp-md) {
+      padding: @gap-md;
+      gap: @gap-lg;
+    }
+
     &:hover {
+      color: @accent;
+
+      .faq-block__index {
+        color: @accent;
+      }
+      .faq-block__icon {
+        border-color: @accent;
+      }
+      .faq-block__icon-line {
+        background: @accent;
+      }
+    }
+  }
+
+  &__index {
+    font-family: @font-mono;
+    font-size: @fs-small;
+    font-weight: 500;
+    color: @text-muted;
+    transition: color @transition;
+    flex-shrink: 0;
+
+    .is-open & {
       color: @accent;
     }
   }
 
+  &__question-text {
+    font-size: @fs-body;
+    font-weight: 500;
+    line-height: 1.4;
+    color: inherit;
+
+    @media (min-width: @bp-md) {
+      font-size: @fs-h5;
+    }
+
+    .is-open & {
+      color: @accent;
+    }
+  }
+
+  // === PLUS / MINUS ИКОНКА ===
   &__icon {
-    font-family: @font-mono;
-    font-size: 24px;
-    color: @accent;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid @text-muted;
+    border-radius: 50%;
     flex-shrink: 0;
+    transition:
+      border-color @transition,
+      transform @transition;
+
+    .is-open & {
+      border-color: @accent;
+      transform: rotate(180deg);
+    }
+  }
+
+  &__icon-line {
+    position: absolute;
+    background: @text-muted;
+    transition:
+      background @transition,
+      transform @transition,
+      opacity @transition;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &--h {
+      width: 10px;
+      height: 1.5px;
+    }
+    &--v {
+      width: 1.5px;
+      height: 10px;
+
+      .is-open & {
+        opacity: 0;
+      }
+    }
+  }
+
+  .is-open &__icon-line {
+    background: @accent;
+  }
+
+  // === ANSWER (с анимацией высоты) ===
+  &__answer-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows @transition;
+
+    .is-open & {
+      grid-template-rows: 1fr;
+    }
   }
 
   &__answer {
-    padding-bottom: @gap-md;
+    overflow: hidden;
+    min-height: 0;
+    // padding в дочернем элементе чтобы не мешать сворачиванию
+  }
+
+  &__answer-inner {
+    padding: 0 @gap-sm @gap-md calc(@gap-sm + 44px + @gap-md);
     color: @text-primary;
-    line-height: @lh-body;
+    line-height: 1.6;
     white-space: pre-wrap;
+
+    @media (min-width: @bp-md) {
+      padding: 0 @gap-md @gap-md calc(@gap-md + 44px + @gap-lg);
+    }
   }
 }
