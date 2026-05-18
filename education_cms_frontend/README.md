@@ -1,59 +1,59 @@
-# EducationCmsFrontend
+# Education CMS Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
+[![Angular](https://img.shields.io/badge/Angular-17+-red?logo=angular&logoColor=white)](https://angular.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![RxJS](https://img.shields.io/badge/RxJS-7.8+-magenta?logo=reactivex&logoColor=white)](https://rxjs.dev/)
 
-## Development server
+Клиентская часть специализированной системы управления контентом (CMS) — визуального конструктора сайтов «информационных окон» для образовательных организаций.
 
-To start a local development server, run:
+Это одностраничное веб-приложение (SPA), построенное на Angular, которое позволяет создавать, наполнять и просматривать сайты учебных подразделений без знаний программирования. Интерфейс адаптирован для трех типов пользователей: посетителей, редакторов и администраторов.
 
-```bash
-ng serve
-```
+**Серверная часть проекта доступна в репозитории:** [education-cms-backend](https://github.com/Arteeemis/EDUCATION-CMS-BACKEND)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Содержание
 
-## Code scaffolding
+- [О проекте](#о-проекте)
+- [Технологический стек](#технологический-стек)
+- [Функциональные возможности](#функциональные-возможности)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## О проекте
 
-```bash
-ng generate component component-name
-```
+Разрабатываемое программное изделие представляет собой веб-приложение, призванное решить проблему фрагментации информационных ресурсов в образовательной среде. Фронтенд реализует две ключевые подсистемы:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1.  **Подсистема визуального конструирования и отображения контента** — интерфейс для администраторов (сборка страниц из блоков с помощью drag-and-drop) и посетителей (просмотр готовых страниц).
+2.  **Подсистема управления пользователями и правами доступа** — интерфейсы для входа в систему и административная панель для управления ролями.
 
-```bash
-ng generate --help
-```
+Приложение представляет собой SPA, построенное на модульной архитектуре Angular, которое взаимодействует с бэкендом через REST API. Для управления асинхронными операциями активно используется RxJS.
 
-## Building
+## Технологический стек
 
-To build the project run:
+- **Язык:** TypeScript
+- **Фреймворк:** Angular 17+
+- **Управление состоянием:** RxJS + Angular Services (с возможным использованием NgRx при масштабировании)
+- **Стилизация:** Less (CSS-препроцессор)
+- **Работа с API:** Angular HttpClient (на основе RxJS `Observable`)
+- **Роутинг:** Angular Router
+- **Аутентификация:** JWT (хранение в httpOnly cookies или localStorage с интерсепторами)
 
-```bash
-ng build
-```
+## Функциональные возможности
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+**Режим посетителя:**
 
-## Running unit tests
+- Просмотр главной страницы «информационного окна» без авторизации.
+- Просмотр страниц, созданных администратором.
+- Просмотр мультимедийного контента встроенного в блоки.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+**Режим редактора:**
 
-```bash
-ng test
-```
+- Авторизация в системе.
+- Доступ к редактированию текстового содержимого блоков, закрепленных за редактором.
+- Упрощенный интерфейс редактирования.
 
-## Running end-to-end tests
+**Режим администратора:**
 
-For end-to-end (e2e) testing, run:
+- **Управление страницами:** создание, редактирование, удаление страниц.
+- **Визуальный конструктор:** добавление типовых блоков на страницу, их удаление.
+- **Настройка блоков:** редактирование параметров блока через формы.
+- **Управление пользователями:** создание учетных записей и назначение прав.
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Приложение находится в разработке - по мере развития readme и стек приложения будет дополняться
