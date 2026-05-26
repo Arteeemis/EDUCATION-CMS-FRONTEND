@@ -1,0 +1,327 @@
+@import (reference) './tokens.less';
+@import (reference) './mixins.less';
+
+/**
+ * Утилитарные классы для использования внутри HTML-блоков из CMS.
+ *
+ * Все эти классы — глобальные (не scoped), потому что они применяются
+ * к разметке, которая приходит сырым HTML и не имеет scope-атрибутов
+ * Angular-компонентов.
+ *
+ * Использование внутри html_content админки:
+ *
+ *   <section class="cms-section cms-section--gray">
+ *     <div class="cms-container">
+ *       <p class="cms-eyebrow">Образование</p>
+ *       <h2 class="cms-h2">Направления и направленности</h2>
+ *       <p class="cms-lead">...</p>
+ *     </div>
+ *   </section>
+ */
+
+// === КОНТЕЙНЕРЫ ===
+.cms-container {
+  width: 100%;
+  max-width: @container-max;
+  margin: 0 auto;
+  padding-left: @container-pad-mobile;
+  padding-right: @container-pad-mobile;
+
+  @media (min-width: @bp-md) {
+    padding-left: @container-pad-tablet;
+    padding-right: @container-pad-tablet;
+  }
+  @media (min-width: @bp-lg) {
+    padding-left: @container-pad-desktop;
+    padding-right: @container-pad-desktop;
+  }
+}
+
+.cms-container--narrow {
+  max-width: 880px;
+}
+
+// === СЕКЦИИ ===
+.cms-section {
+  padding-top: @gap-xl;
+  padding-bottom: @gap-xl;
+
+  @media (min-width: @bp-md) {
+    padding-top: @gap-2xl;
+    padding-bottom: @gap-2xl;
+  }
+
+  &--gray {
+    background: @bg-section;
+  }
+  &--dark {
+    background: @bg-dark;
+    color: @white;
+  }
+  &--compact {
+    padding-top: @gap-lg;
+    padding-bottom: @gap-lg;
+    @media (min-width: @bp-md) {
+      padding-top: @gap-xl;
+      padding-bottom: @gap-xl;
+    }
+  }
+}
+
+// === ТИПОГРАФИКА ===
+.cms-eyebrow {
+  font-family: @font-mono;
+  font-size: @fs-micro;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: @text-accent;
+  margin-bottom: @gap-sm;
+}
+
+.cms-h1 {
+  font-size: @fs-h1-mobile;
+  font-weight: @fw-h1;
+  line-height: @lh-h1;
+  letter-spacing: -0.01em;
+  color: @text-primary;
+  margin-bottom: @gap-md;
+
+  @media (min-width: @bp-md) {
+    font-size: @fs-h1;
+  }
+}
+
+.cms-h2 {
+  font-size: @fs-h2-mobile;
+  font-weight: @fw-h2;
+  line-height: @lh-h2;
+  color: @text-primary;
+  margin-bottom: @gap-md;
+
+  @media (min-width: @bp-md) {
+    font-size: @fs-h2;
+  }
+}
+
+.cms-h3 {
+  font-size: @fs-h3-mobile;
+  font-weight: @fw-h3;
+  line-height: @lh-h3;
+  color: @text-primary;
+  margin-bottom: @gap-sm;
+
+  @media (min-width: @bp-md) {
+    font-size: @fs-h3;
+  }
+}
+
+.cms-h4 {
+  font-size: @fs-h4-mobile;
+  font-weight: @fw-h4;
+  line-height: @lh-h4;
+  color: @text-primary;
+  margin-bottom: @gap-sm;
+
+  @media (min-width: @bp-md) {
+    font-size: @fs-h4;
+  }
+}
+
+.cms-lead {
+  font-size: @fs-h5;
+  line-height: 1.5;
+  color: @text-secondary;
+  max-width: 720px;
+  margin-bottom: @gap-md;
+}
+
+.cms-text {
+  font-size: @fs-body;
+  line-height: @lh-body;
+  color: @text-primary;
+}
+
+.cms-text-muted {
+  color: @text-secondary;
+}
+
+.cms-mono {
+  font-family: @font-mono;
+}
+
+.cms-accent {
+  color: @text-accent;
+}
+
+// === АКЦЕНТЫ В ЗАГОЛОВКАХ ===
+// Использование: <h1 class="cms-h1">Сильная IT-кафедра для технологий <span class="cms-accent">будущего</span></h1>
+
+// === КНОПКИ ===
+.cms-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: @gap-xs;
+  padding: 12px 22px;
+  border-radius: @radius-sm;
+  font-size: @fs-small;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background @transition,
+    color @transition,
+    border-color @transition,
+    transform @transition;
+  white-space: nowrap;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.cms-btn--primary {
+  background: @accent;
+  color: @white;
+  &:hover {
+    background: darken(@accent, 6%);
+    color: @white;
+  }
+}
+
+.cms-btn--secondary {
+  background: @white;
+  color: @text-primary;
+  border-color: @border;
+  &:hover {
+    border-color: @accent;
+    color: @accent;
+  }
+}
+
+.cms-btn--warm {
+  background: @accent-warm;
+  color: @white;
+  &:hover {
+    background: darken(@accent-warm, 6%);
+    color: @white;
+  }
+}
+
+.cms-btn--dark {
+  background: @dark;
+  color: @white;
+  &:hover {
+    background: lighten(@dark, 8%);
+    color: @white;
+  }
+}
+
+// === GRID СЕТКИ ===
+.cms-grid {
+  display: grid;
+  gap: @gap-md;
+
+  @media (min-width: @bp-md) {
+    gap: @gap-lg;
+  }
+}
+
+.cms-grid--2 {
+  grid-template-columns: 1fr;
+  @media (min-width: @bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cms-grid--3 {
+  grid-template-columns: 1fr;
+  @media (min-width: @bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: @bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cms-grid--4 {
+  grid-template-columns: repeat(2, 1fr);
+  @media (min-width: @bp-md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// === КАРТОЧКИ ===
+.cms-card {
+  background: @white;
+  border: 1px solid @border;
+  border-radius: @radius;
+  padding: @gap-md;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; // НОВОЕ: дети не растягиваются на всю ширину
+  gap: @gap-sm;
+  transition:
+    border-color @transition,
+    box-shadow @transition,
+    transform @transition;
+
+  @media (min-width: @bp-md) {
+    padding: @gap-lg; // СРЕДНЕЕ значение (24px, было 40px)
+    gap: @gap-sm;
+  }
+
+  &:hover {
+    border-color: @border-strong;
+    box-shadow: @shadow-hover;
+    transform: translateY(-2px);
+  }
+
+  // Дети, которые должны быть на всю ширину (заголовки, текст, описание)
+  > .cms-h2,
+  > .cms-h3,
+  > .cms-h4,
+  > .cms-lead,
+  > .cms-text {
+    align-self: stretch;
+    margin-bottom: 0;
+  }
+
+  > .cms-eyebrow {
+    margin-bottom: 0;
+  }
+
+  > .cms-btn {
+    margin-top: auto;
+  }
+}
+
+// === БЕЙДЖИ ===
+.cms-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: @font-mono;
+  font-size: @fs-micro;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: @radius-sm;
+  background: @gray1;
+  color: @text-secondary;
+  letter-spacing: 0.04em;
+  border: 1px solid @border;
+
+  &--accent {
+    background: fade(@accent, 12%);
+    color: @text-accent;
+    border-color: fade(@accent, 30%);
+  }
+  &--warm {
+    background: fade(@accent-warm, 12%);
+    color: @accent-warm;
+    border-color: fade(@accent-warm, 30%);
+  }
+}

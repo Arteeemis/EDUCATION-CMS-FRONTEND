@@ -1,4 +1,5 @@
 import { Component, input, inject, signal, effect } from '@angular/core';
+import { Router } from '@angular/router';
 import { PagesService } from '@core/services/pages.service';
 import { LayoutService } from '@core/services/layout.service';
 import { PageDetail, PageBlockPlacement } from '@core/models';
@@ -26,6 +27,7 @@ export class PageComponent {
 
   private readonly pages = inject(PagesService);
   private readonly layout = inject(LayoutService);
+  private readonly router = inject(Router);
 
   readonly page = signal<PageDetail | null>(null);
   readonly loading = signal(false);
@@ -44,15 +46,22 @@ export class PageComponent {
         next: (page) => {
           this.page.set(page);
           this.loading.set(false);
-          // Применяем видимость глобальных header/footer на основе блоков страницы
           this.layout.applyPageVisibility(page);
         },
         error: (err) => {
-          this.error.set(
-            err?.status === 404 ? 'Страница не найдена' : 'Не удалось загрузить страницу',
-          );
           this.loading.set(false);
-          // На странице ошибки — показываем header/footer как обычно
+
+          // 404 — перенаправляем на красивую страницу "не найдено"
+          if (err?.status === 404) {
+            this.router.navigate(['/not-found'], {
+              replaceUrl: true, // не оставляем кривой URL в истории
+              skipLocationChange: false, // адресная строка обновится на /not-found
+            });
+            return;
+          }
+
+          // Прочие ошибки (500, network) — показываем inline-сообщение
+          this.error.set('Не удалось загрузить страницу');
           this.layout.resetVisibility();
         },
       });

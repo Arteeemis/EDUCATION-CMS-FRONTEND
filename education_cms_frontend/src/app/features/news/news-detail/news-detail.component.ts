@@ -57,10 +57,14 @@ export class NewsDetailComponent {
           this.loading.set(false);
         },
         error: (err) => {
-          this.error.set(
-            err?.status === 404 ? 'Публикация не найдена' : 'Не удалось загрузить публикацию',
-          );
           this.loading.set(false);
+
+          if (err?.status === 404) {
+            this.router.navigate(['/not-found'], { replaceUrl: true });
+            return;
+          }
+
+          this.error.set('Не удалось загрузить публикацию');
         },
       });
     });

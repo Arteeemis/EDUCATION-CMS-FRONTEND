@@ -5,10 +5,60 @@
   display: flex;
   flex-direction: column;
 
+  // Все блоки кроме первого получают отступ сверху
+  &__block + &__block {
+    margin-top: 0; // отступы делаем через padding самого блока
+  }
+
+  // Дефолтный блок — стандартные вертикальные отступы и контейнер
   &__block {
     .container();
     padding-top: @gap-lg;
     padding-bottom: @gap-lg;
+
+    @media (min-width: @bp-md) {
+      padding-top: @gap-xl;
+      padding-bottom: @gap-xl;
+    }
+  }
+
+  // Первый блок прижимаем к шапке плотнее, чтобы hero выглядел "в шапке"
+  &__block:first-child {
+    padding-top: @gap-md;
+    @media (min-width: @bp-md) {
+      padding-top: @gap-lg;
+    }
+  }
+
+  // HTML-блок: если внутри используется .cms-section, ему нужна вся ширина
+  // экрана (вне контейнера). Проверяем через :has() — поддерживается
+  // современными браузерами.
+  &__block[data-block-type='html']:has(.cms-section) {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    max-width: none;
+    width: 100%;
+  }
+  // Иначе HTML-блок ведёт себя как обычный — в контейнере с отступами
+  // (правила контейнера уже выше в &__block).
+
+  // FAQ-блок: больше пространства, на тёмном фоне отличается от соседей
+  &__block[data-block-type='faq'] {
+    padding-top: @gap-xl;
+    padding-bottom: @gap-xl;
+    @media (min-width: @bp-md) {
+      padding-top: @gap-2xl;
+      padding-bottom: @gap-2xl;
+    }
+  }
+
+  // Footer-блок не рендерим внутри страницы (он глобальный) — этой ветки
+  // не должно случиться, но на всякий случай.
+  &__block[data-block-type='footer_contacts'],
+  &__block[data-block-type='header_links'] {
+    display: none;
   }
 }
 
