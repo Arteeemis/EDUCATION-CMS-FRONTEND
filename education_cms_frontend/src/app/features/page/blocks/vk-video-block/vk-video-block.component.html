@@ -1,0 +1,25 @@
+<div class="vk-video">
+  @if (embedUrl(); as url) {
+    <div class="vk-video__container">
+      <iframe
+        class="vk-video__iframe"
+        [src]="url"
+        width="100%"
+        height="400"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; encrypted-media"
+      ></iframe>
+    </div>
+  } @else {
+    <div class="vk-video__error">
+      <p class="vk-video__error-message">
+        @if (block().video_url) {
+          Не удалось загрузить видео. Проверьте корректность ссылки.
+        } @else {
+          Видео не указано.
+        }
+      </p>
+    </div>
+  }
+</div>

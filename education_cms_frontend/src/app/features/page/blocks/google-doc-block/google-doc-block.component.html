@@ -1,0 +1,24 @@
+<section class="google-doc-block">
+  @if (block().admin_label) {
+    <div class="google-doc-block__label">{{ block().admin_label }}</div>
+  }
+
+  @if (isSupported()) {
+    @if (embedHtml(); as html) {
+      <div class="google-doc-block__embed" [innerHTML]="html"></div>
+    } @else {
+      <div class="google-doc-block__frame">
+        <iframe
+          [src]="embedUrl()"
+          title="Google Docs"
+          loading="lazy"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
+        ></iframe>
+      </div>
+    }
+  } @else {
+    <div class="google-doc-block__fallback">
+      Невозможно отобразить документ. Проверьте ссылку Google Docs.
+    </div>
+  }
+</section>

@@ -43,6 +43,14 @@
   }
   // Иначе HTML-блок ведёт себя как обычный — в контейнере с отступами
   // (правила контейнера уже выше в &__block).
+  &__block[data-block-type='links']:has(.cms-section) {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    max-width: none;
+    width: 100%;
+  }
 
   // FAQ-блок: больше пространства, на тёмном фоне отличается от соседей
   &__block[data-block-type='faq'] {

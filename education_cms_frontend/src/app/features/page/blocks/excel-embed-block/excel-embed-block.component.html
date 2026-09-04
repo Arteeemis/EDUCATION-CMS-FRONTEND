@@ -1,0 +1,23 @@
+<section class="excel-embed-block">
+  @if (block().admin_label) {
+    <div class="excel-embed-block__label">{{ block().admin_label }}</div>
+  }
+  @if (isSupported()) {
+    @if (embedHtml(); as html) {
+      <div class="excel-embed-block__embed" [innerHTML]="html"></div>
+    } @else {
+      <div class="excel-embed-block__frame">
+        <iframe
+          [src]="embedUrl()"
+          title="Google Sheets"
+          loading="lazy"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
+        ></iframe>
+      </div>
+    }
+  } @else {
+    <div class="excel-embed-block__fallback">
+      Невозможно отобразить таблицу. Проверьте ссылку Google Sheets.
+    </div>
+  }
+</section>

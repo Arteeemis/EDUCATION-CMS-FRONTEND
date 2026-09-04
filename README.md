@@ -33,7 +33,6 @@
 - **Стилизация:** Less (CSS-препроцессор)
 - **Работа с API:** Angular HttpClient (на основе RxJS `Observable`)
 - **Роутинг:** Angular Router
-- **Аутентификация:** JWT (хранение в httpOnly cookies или localStorage с интерсепторами)
 
 ## Функциональные возможности
 

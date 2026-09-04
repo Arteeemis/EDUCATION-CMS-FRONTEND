@@ -1,0 +1,53 @@
+<section class="cms-section cms-section--dark" id="extras">
+  <div class="cms-container">
+    <header class="adm-docs__head">
+      <span class="adm-docs__num">Ссылки</span>
+      <h2 class="adm-docs__title">{{ block().title }}</h2>
+      @if (block().description) {
+        <p class="adm-docs__sub">
+          {{ block().description }}
+        </p>
+      }
+    </header>
+
+    @if (hasLinks()) {
+      <div class="adm-docs__grid">
+        @for (link of links(); track link.url) {
+          <a
+            [href]="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="adm-docs__card"
+            [class.links-block__card--invalid]="!isValidUrl(link.url)"
+          >
+            <span class="adm-docs__type">URL</span>
+            <div class="adm-docs__info">
+              <p class="adm-docs__name">{{ link.description }}</p>
+              <p class="adm-docs__desc">Информационный ресурс</p>
+            </div>
+            <svg
+              class="adm-docs__arrow"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 15L15 5M15 5H7M15 5V13"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        }
+      </div>
+    } @else {
+      <div class="links-block__empty">
+        <p class="links-block__empty-message">Нет доступных ссылок</p>
+      </div>
+    }
+  </div>
+</section>

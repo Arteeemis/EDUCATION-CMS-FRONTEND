@@ -1,0 +1,34 @@
+.excel-embed-block {
+  display: block;
+}
+
+.excel-embed-block__label {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.excel-embed-block__frame,
+.excel-embed-block__embed {
+  width: 100%;
+  min-height: 560px;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.excel-embed-block__frame iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  border: 0;
+}
+
+.excel-embed-block__fallback {
+  padding: 1.5rem;
+  border: 1px solid var(--border-warning);
+  border-radius: 0.75rem;
+  background: var(--surface-warning);
+  color: var(--text-warning);
+}

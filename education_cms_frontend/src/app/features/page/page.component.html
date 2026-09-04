@@ -21,6 +21,18 @@
             @case ('news_feed') {
               <app-news-feed-block [block]="$any(placement.block)" />
             }
+            @case ('google_doc') {
+              <app-google-doc-block [block]="$any(placement.block)" />
+            }
+            @case ('google_sheet') {
+              <app-excel-embed-block [block]="$any(placement.block)" />
+            }
+            @case ('vk_video') {
+              <app-vk-video-block [block]="$any(placement.block)" />
+            }
+            @case ('links') {
+              <app-links-block [block]="$any(placement.block)" />
+            }
             @case ('header_links') {
               <app-header-links-block [block]="$any(placement.block)" />
             }

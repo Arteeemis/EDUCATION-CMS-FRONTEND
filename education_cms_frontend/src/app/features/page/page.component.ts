@@ -8,6 +8,10 @@ import { FaqBlockComponent } from './blocks/faq-block/faq-block.component';
 import { NewsFeedBlockComponent } from './blocks/news-feed-block/news-feed-block.component';
 import { HeaderLinksBlockComponent } from './blocks/header-links-block/header-links-block.component';
 import { FooterContactsBlockComponent } from './blocks/footer-contacts-block/footer-contacts-block.component';
+import { GoogleDocBlockComponent } from './blocks/google-doc-block/google-doc-block.component';
+import { ExcelEmbedBlockComponent } from './blocks/excel-embed-block/excel-embed-block.component';
+import { VkVideoBlockComponent } from './blocks/vk-video-block/vk-video-block.component';
+import { LinksBlockComponent } from './blocks/links-block/links-block.component';
 
 @Component({
   selector: 'app-page',
@@ -18,6 +22,10 @@ import { FooterContactsBlockComponent } from './blocks/footer-contacts-block/foo
     NewsFeedBlockComponent,
     HeaderLinksBlockComponent,
     FooterContactsBlockComponent,
+    GoogleDocBlockComponent,
+    ExcelEmbedBlockComponent,
+    VkVideoBlockComponent,
+    LinksBlockComponent,
   ],
   templateUrl: './page.component.html',
   styleUrl: './page.component.less',
